@@ -60,8 +60,6 @@ namespace ClientGUI
                     
                     StationsList.Items.Add(station.name);
                 }
-                
-
             }
         }
 
@@ -94,11 +92,8 @@ namespace ClientGUI
                     }
                     
                 }
-                
             }
-
-            
-         }
+        }
 
         }
 }

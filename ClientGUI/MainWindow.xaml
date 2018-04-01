@@ -10,7 +10,7 @@
         <ComboBox x:Name="CityBox" HorizontalAlignment="Left" Margin="110,29,0,0" VerticalAlignment="Top" Width="191" SelectionChanged="CityBox_SelectionChanged"/>
         <ListBox x:Name="StationsList" HorizontalAlignment="Left" Height="239" Margin="382,67,0,0" VerticalAlignment="Top" Width="348" SelectionChanged="StationsList_SelectionChanged"/>
         <Label Content="Ville :" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="73"/>
-        <TextBox x:Name="SearchStationTextBox" HorizontalAlignment="Left" Height="23" Margin="382,29,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="241" TextChanged="TextBox_TextChanged"/>
+        <TextBox x:Name="SearchStationTextBox" HorizontalAlignment="Left" Height="23" Margin="382,29,0,0" TextWrapping="Wrap" Text="Station..." VerticalAlignment="Top" Width="241" TextChanged="TextBox_TextChanged"/>
         <Label x:Name="AvailableBikesLabel" Content="" HorizontalAlignment="Left" Margin="382,311,0,0" VerticalAlignment="Top" Width="348" Height="43"/>
 
     </Grid>

@@ -17,6 +17,7 @@ namespace ClientConsole
                               "Type 'city' to select a city\n" +
                               "Type 'help' for help\n" +
                               "Type 'exit' to exit\n";
+            
                               
             
             Console.WriteLine("Welcome !");

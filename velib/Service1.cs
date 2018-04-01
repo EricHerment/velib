@@ -16,13 +16,17 @@ namespace velib
     public class Service1 : IService1
     {
         static string token = "b0e7b9c0530c7797ba8f5dfdff2ea74e47fcf958";
+        private static string citiesRequest = "https://api.jcdecaux.com/vls/v1/contracts?apiKey=";
+        private static string stationDataRequest = "https://api.jcdecaux.com/vls/v1/stations?contract=";
+        private static string stationsRequest = "https://api.jcdecaux.com/vls/v1/stations?contract=";
+        private int cacheBuffer = 15;
         ObjectCache cache = MemoryCache.Default;
         private List<Station> stations;
         private List<City> cities;
 
         public List<City> GetCities()
         {
-            WebRequest request = WebRequest.Create("https://api.jcdecaux.com/vls/v1/contracts?apiKey=" + token);
+            WebRequest request = WebRequest.Create(citiesRequest + token);
             WebResponse response = request.GetResponse();
             Console.WriteLine(((HttpWebResponse)response).StatusDescription);
             Stream dataStream = response.GetResponseStream();
@@ -31,34 +35,35 @@ namespace velib
             cities = JsonConvert.DeserializeObject<City[]>(serverResponse).ToList();
 
             return cities;
-
         }
 
         public string GetStationData(string stationName, string cityName)
         {
-           
-                WebRequest request = WebRequest.Create("https://api.jcdecaux.com/vls/v1/stations?contract=" + cityName + "&apiKey=" + token);
-                WebResponse response = request.GetResponse();
-                Console.WriteLine(((HttpWebResponse)response).StatusDescription);
-                Stream dataStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(dataStream);
-                string serverResponse = reader.ReadToEnd();
 
-                string research = stationName;
-                
-                stations = JsonConvert.DeserializeObject<Station[]>(serverResponse).ToList();
-                Station stationSearched = null;
+            WebRequest request = WebRequest.Create(stationDataRequest + cityName + "&apiKey=" + token);
+            WebResponse response = request.GetResponse();
+            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+            Stream dataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(dataStream);
+            string serverResponse = reader.ReadToEnd();
 
-                foreach (Station station in stations) { 
-                    string name = station.name;
+            string research = stationName;
 
-                    if (name.ToLower().Contains(research.ToLower())) { 
-                        stationSearched = station;
-                        break;
-                    }
+            stations = JsonConvert.DeserializeObject<Station[]>(serverResponse).ToList();
+            Station stationSearched = null;
+
+            foreach (Station station in stations)
+            {
+                string name = station.name;
+
+                if (name.ToLower().Contains(research.ToLower()))
+                {
+                    stationSearched = station;
+                    break;
                 }
+            }
 
-                StringBuilder output = new StringBuilder();
+            StringBuilder output = new StringBuilder();
 
             if (stationSearched != null)
             {
@@ -67,7 +72,7 @@ namespace velib
             }
             else
             {
-                
+
                 output.AppendLine("Cette station n'existe pas");
 
             }
@@ -76,15 +81,31 @@ namespace velib
 
         public List<Station> GetStations(string cityName)
         {
-            WebRequest request = WebRequest.Create("https://api.jcdecaux.com/vls/v1/stations?contract=" + cityName + "&apiKey=" + token);
-            WebResponse response = request.GetResponse();
-            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
-            Stream dataStream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(dataStream);
-            string serverResponse = reader.ReadToEnd();
+            if (!cache.Contains(cityName))
+            {
+                WebRequest request = WebRequest.Create(stationsRequest + cityName + "&apiKey=" + token);
+                WebResponse response = request.GetResponse();
+                Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+                Stream dataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(dataStream);
+                string serverResponse = reader.ReadToEnd();
 
-           
-            stations = JsonConvert.DeserializeObject<Station[]>(serverResponse).ToList();
+
+                stations = JsonConvert.DeserializeObject<Station[]>(serverResponse).ToList();
+
+                CacheItemPolicy policy = new CacheItemPolicy
+                {
+                    AbsoluteExpiration = DateTimeOffset.Now.AddSeconds(cacheBuffer)
+                };
+                CacheItem item = new CacheItem(cityName, stations);
+                cache.Add(item, policy);
+            }
+
+            else
+            {
+                stations = (List<Station>) cache.Get(cityName);
+            }
+
             return stations;
         }
     }

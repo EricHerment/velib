@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6a82a647-c6e7-44c7-83b7-ffaf64371fce" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9710b2d7-087f-4fa1-9202-fd48d5aa3d32" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,11 +22,11 @@
     <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/velib/Service1/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="91c8ee47-9625-4c5c-ade2-408af2d0f7b0" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/velib/Service1/?disco" />
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="c13b8d63-c24c-4e4b-96c4-755106ed51a4" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/velib/Service1/?xsd=xsd2" />
-    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="9b998b00-ee9e-4bdd-9e51-28003fc4a2b8" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/velib/Service1/?xsd=xsd0" />
-    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="0a3bf618-c3b3-494e-824b-cc1196e75cbd" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/velib/Service1/?wsdl" />
-    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="dfe72ae2-08f6-4f88-93bd-aed3117d0e07" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/velib/Service1/?xsd=xsd1" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="c6bbc5cf-67d1-4b73-b4c0-27140a5e0d1e" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/velib/Service1/?disco" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="85615dda-3314-4a88-9f20-115fec036289" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/velib/Service1/?xsd=xsd2" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="b76390e6-c873-4773-816a-737cb81d9e09" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/velib/Service1/?xsd=xsd0" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="fa6f5885-8956-48b3-8fc6-1543762241fb" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/velib/Service1/?wsdl" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="89bb4dd1-228d-4b84-913a-0ebc7c6c77ea" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/velib/Service1/?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
