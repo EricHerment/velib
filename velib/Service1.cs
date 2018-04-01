@@ -7,6 +7,8 @@ using System.Net;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Runtime.Caching;
+using Newtonsoft.Json;
 
 namespace velib
 {
@@ -14,53 +16,76 @@ namespace velib
     public class Service1 : IService1
     {
         static string token = "b0e7b9c0530c7797ba8f5dfdff2ea74e47fcf958";
+        ObjectCache cache = MemoryCache.Default;
+        private List<Station> stations;
+        private List<City> cities;
 
-
-        public string GetData(string stationName)
+        public List<City> GetCities()
         {
-            WebRequest request = WebRequest.Create("https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=" + token);
+            WebRequest request = WebRequest.Create("https://api.jcdecaux.com/vls/v1/contracts?apiKey=" + token);
+            WebResponse response = request.GetResponse();
+            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+            Stream dataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(dataStream);
+            string serverResponse = reader.ReadToEnd();
+            cities = JsonConvert.DeserializeObject<City[]>(serverResponse).ToList();
+
+            return cities;
+
+        }
+
+        public string GetStationData(string stationName, string cityName)
+        {
+           
+                WebRequest request = WebRequest.Create("https://api.jcdecaux.com/vls/v1/stations?contract=" + cityName + "&apiKey=" + token);
+                WebResponse response = request.GetResponse();
+                Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+                Stream dataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(dataStream);
+                string serverResponse = reader.ReadToEnd();
+
+                string research = stationName;
+                
+                stations = JsonConvert.DeserializeObject<Station[]>(serverResponse).ToList();
+                Station stationSearched = null;
+
+                foreach (Station station in stations) { 
+                    string name = station.name;
+
+                    if (name.ToLower().Contains(research.ToLower())) { 
+                        stationSearched = station;
+                        break;
+                    }
+                }
+
+                StringBuilder output = new StringBuilder();
+
+            if (stationSearched != null)
+            {
+                output.AppendLine("Station :" + stationSearched.name);
+                output.AppendLine("Nombre de vélos disponibles :" + stationSearched.available_bikes);
+            }
+            else
+            {
+                
+                output.AppendLine("Cette station n'existe pas");
+
+            }
+            return output.ToString();
+        }
+
+        public List<Station> GetStations(string cityName)
+        {
+            WebRequest request = WebRequest.Create("https://api.jcdecaux.com/vls/v1/stations?contract=" + cityName + "&apiKey=" + token);
             WebResponse response = request.GetResponse();
             Console.WriteLine(((HttpWebResponse)response).StatusDescription);
             Stream dataStream = response.GetResponseStream();
             StreamReader reader = new StreamReader(dataStream);
             string serverResponse = reader.ReadToEnd();
 
-            string research = stationName;
-            string responseFromServer = serverResponse;
-            JArray j = JArray.Parse(responseFromServer);
-            int number = 0;
-            string station = null;
-
-            foreach (JObject item in j)
-            {
-                string name = (string) item.SelectToken("name");
-
-                if (name.ToLower().Contains(research.ToLower()))
-                {
-                    number = (int) item.SelectToken("available_bikes");
-                    station = name;
-                    break;
-                }
-            }
-
-            StringBuilder output = new StringBuilder();
-
-            if (station != null)
-            {
-                output.AppendLine("Station :" + station);
-                output.AppendLine("Nombre de vélos disponibles :" + number);
-            }
-            else
-            {
-                output.AppendLine("Invalid name");
-                output.AppendLine("Type 'stations' for a list of the stations available");
-            }
-               
-
-            return output.ToString();
-
+           
+            stations = JsonConvert.DeserializeObject<Station[]>(serverResponse).ToList();
+            return stations;
         }
-
-        
     }
 }

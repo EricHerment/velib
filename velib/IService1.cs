@@ -12,12 +12,19 @@ namespace velib
     public interface IService1
     {
         [OperationContract]
-        string GetData(string stationName);
+        string GetStationData(string stationName, string cityName);
 
-        
+        [OperationContract]
+        List<Station> GetStations(string cityName);
+
+        [OperationContract]
+        List<City> GetCities();
+
 
         // TODO: ajoutez vos opérations de service ici
     }
+
+   
 
     
 }

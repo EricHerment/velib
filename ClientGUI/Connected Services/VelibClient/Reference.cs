@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ClientConsole.VelibClient {
+namespace ClientGUI.VelibClient {
     using System.Runtime.Serialization;
     using System;
     
@@ -146,25 +146,25 @@ namespace ClientConsole.VelibClient {
         System.Threading.Tasks.Task<string> GetStationDataAsync(string stationName, string cityName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetStations", ReplyAction="http://tempuri.org/IService1/GetStationsResponse")]
-        ClientConsole.VelibClient.Station[] GetStations(string cityName);
+        ClientGUI.VelibClient.Station[] GetStations(string cityName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetStations", ReplyAction="http://tempuri.org/IService1/GetStationsResponse")]
-        System.Threading.Tasks.Task<ClientConsole.VelibClient.Station[]> GetStationsAsync(string cityName);
+        System.Threading.Tasks.Task<ClientGUI.VelibClient.Station[]> GetStationsAsync(string cityName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCities", ReplyAction="http://tempuri.org/IService1/GetCitiesResponse")]
-        ClientConsole.VelibClient.City[] GetCities();
+        ClientGUI.VelibClient.City[] GetCities();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetCities", ReplyAction="http://tempuri.org/IService1/GetCitiesResponse")]
-        System.Threading.Tasks.Task<ClientConsole.VelibClient.City[]> GetCitiesAsync();
+        System.Threading.Tasks.Task<ClientGUI.VelibClient.City[]> GetCitiesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IService1Channel : ClientConsole.VelibClient.IService1, System.ServiceModel.IClientChannel {
+    public interface IService1Channel : ClientGUI.VelibClient.IService1, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class Service1Client : System.ServiceModel.ClientBase<ClientConsole.VelibClient.IService1>, ClientConsole.VelibClient.IService1 {
+    public partial class Service1Client : System.ServiceModel.ClientBase<ClientGUI.VelibClient.IService1>, ClientGUI.VelibClient.IService1 {
         
         public Service1Client() {
         }
@@ -193,19 +193,19 @@ namespace ClientConsole.VelibClient {
             return base.Channel.GetStationDataAsync(stationName, cityName);
         }
         
-        public ClientConsole.VelibClient.Station[] GetStations(string cityName) {
+        public ClientGUI.VelibClient.Station[] GetStations(string cityName) {
             return base.Channel.GetStations(cityName);
         }
         
-        public System.Threading.Tasks.Task<ClientConsole.VelibClient.Station[]> GetStationsAsync(string cityName) {
+        public System.Threading.Tasks.Task<ClientGUI.VelibClient.Station[]> GetStationsAsync(string cityName) {
             return base.Channel.GetStationsAsync(cityName);
         }
         
-        public ClientConsole.VelibClient.City[] GetCities() {
+        public ClientGUI.VelibClient.City[] GetCities() {
             return base.Channel.GetCities();
         }
         
-        public System.Threading.Tasks.Task<ClientConsole.VelibClient.City[]> GetCitiesAsync() {
+        public System.Threading.Tasks.Task<ClientGUI.VelibClient.City[]> GetCitiesAsync() {
             return base.Channel.GetCitiesAsync();
         }
     }
