@@ -18,8 +18,11 @@ namespace ClientConsoleEvents
             objClient.SubscribeCalculatedEvent();
             objClient.SubscribeCalculationFinishedEvent();
 
-           
-            objClient.GetStationData("Valade", "Toulouse");
+            Console.WriteLine("Donnez le nom de la ville");
+            string ville = Console.ReadLine();
+            Console.WriteLine("Donnez le nom de la station");
+            string station = Console.ReadLine();
+            objClient.GetStationData(station, ville);
 
            
 
