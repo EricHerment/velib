@@ -16,9 +16,9 @@ namespace ClientConsoleEvents
             Console.WriteLine("Velos :{0}", nbVelib);
         }
 
-        public void CalculationFinished()
+       /* public void CalculationFinished()
         {
             Console.WriteLine("Calculation completed");
-        }
+        }*/
     }
 }

@@ -15,14 +15,16 @@ namespace ClientConsoleEvents
             InstanceContext iCntxt = new InstanceContext(objsink);
 
             VelibServiceReference.VelibServiceClient objClient = new VelibServiceReference.VelibServiceClient(iCntxt);
-            objClient.SubscribeCalculatedEvent();
-            objClient.SubscribeCalculationFinishedEvent();
+            
 
             Console.WriteLine("Donnez le nom de la ville");
             string ville = Console.ReadLine();
             Console.WriteLine("Donnez le nom de la station");
             string station = Console.ReadLine();
-            objClient.GetStationData(station, ville);
+            Console.WriteLine("Donnez un temps de rafraichissement");
+            int time = Int32.Parse(Console.ReadLine());
+            
+            objClient.SubscribeStationData(station, ville, time);
 
            
 

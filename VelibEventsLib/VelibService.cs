@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.ServiceModel;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace VelibEventsLib
@@ -13,9 +14,7 @@ namespace VelibEventsLib
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class VelibService : IVelibService
     {
-        static Action<string, string, string> m_Event1 = delegate { };//
-
-        static Action m_Event2 = delegate { };
+        static Action<string, string, string> m_Event1 = delegate { };
 
         static string token = "b0e7b9c0530c7797ba8f5dfdff2ea74e47fcf958";
         
@@ -64,19 +63,25 @@ namespace VelibEventsLib
             
 
             m_Event1(cityName, stationName, output.ToString());
-            m_Event2();
+            
         }
 
-        public void SubscribeCalculatedEvent()
+        
+
+        public void SubscribeStationData(string stationName, string cityName, int refreshingTime)
         {
             IVelibServiceEvents subscriber = OperationContext.Current.GetCallbackChannel<IVelibServiceEvents>();
             m_Event1 += subscriber.Calculated;
-        }
 
-        public void SubscribeCalculationFinishedEvent()
-        {
-            IVelibServiceEvents subscriber = OperationContext.Current.GetCallbackChannel<IVelibServiceEvents>();
-            m_Event2 += subscriber.CalculationFinished;
+            Task.Run(() => {
+                while (true)
+                {
+                    GetStationData(stationName, cityName);
+                    Thread.Sleep(refreshingTime * 1000);
+                }
+            });
+            
+
         }
     }
 }

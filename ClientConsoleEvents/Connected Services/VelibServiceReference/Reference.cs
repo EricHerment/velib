@@ -15,23 +15,11 @@ namespace ClientConsoleEvents.VelibServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="VelibServiceReference.IVelibService", CallbackContract=typeof(ClientConsoleEvents.VelibServiceReference.IVelibServiceCallback))]
     public interface IVelibService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVelibService/GetStationData", ReplyAction="http://tempuri.org/IVelibService/GetStationDataResponse")]
-        void GetStationData(string stationName, string cityName);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVelibService/SubscribeStationData", ReplyAction="http://tempuri.org/IVelibService/SubscribeStationDataResponse")]
+        void SubscribeStationData(string stationName, string cityName, int refreshingTime);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVelibService/GetStationData", ReplyAction="http://tempuri.org/IVelibService/GetStationDataResponse")]
-        System.Threading.Tasks.Task GetStationDataAsync(string stationName, string cityName);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVelibService/SubscribeCalculatedEvent", ReplyAction="http://tempuri.org/IVelibService/SubscribeCalculatedEventResponse")]
-        void SubscribeCalculatedEvent();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVelibService/SubscribeCalculatedEvent", ReplyAction="http://tempuri.org/IVelibService/SubscribeCalculatedEventResponse")]
-        System.Threading.Tasks.Task SubscribeCalculatedEventAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVelibService/SubscribeCalculationFinishedEvent", ReplyAction="http://tempuri.org/IVelibService/SubscribeCalculationFinishedEventResponse")]
-        void SubscribeCalculationFinishedEvent();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVelibService/SubscribeCalculationFinishedEvent", ReplyAction="http://tempuri.org/IVelibService/SubscribeCalculationFinishedEventResponse")]
-        System.Threading.Tasks.Task SubscribeCalculationFinishedEventAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IVelibService/SubscribeStationData", ReplyAction="http://tempuri.org/IVelibService/SubscribeStationDataResponse")]
+        System.Threading.Tasks.Task SubscribeStationDataAsync(string stationName, string cityName, int refreshingTime);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -39,9 +27,6 @@ namespace ClientConsoleEvents.VelibServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IVelibService/Calculated")]
         void Calculated(string city, string station, string nbVelib);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IVelibService/CalculationFinished")]
-        void CalculationFinished();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -72,28 +57,12 @@ namespace ClientConsoleEvents.VelibServiceReference {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void GetStationData(string stationName, string cityName) {
-            base.Channel.GetStationData(stationName, cityName);
+        public void SubscribeStationData(string stationName, string cityName, int refreshingTime) {
+            base.Channel.SubscribeStationData(stationName, cityName, refreshingTime);
         }
         
-        public System.Threading.Tasks.Task GetStationDataAsync(string stationName, string cityName) {
-            return base.Channel.GetStationDataAsync(stationName, cityName);
-        }
-        
-        public void SubscribeCalculatedEvent() {
-            base.Channel.SubscribeCalculatedEvent();
-        }
-        
-        public System.Threading.Tasks.Task SubscribeCalculatedEventAsync() {
-            return base.Channel.SubscribeCalculatedEventAsync();
-        }
-        
-        public void SubscribeCalculationFinishedEvent() {
-            base.Channel.SubscribeCalculationFinishedEvent();
-        }
-        
-        public System.Threading.Tasks.Task SubscribeCalculationFinishedEventAsync() {
-            return base.Channel.SubscribeCalculationFinishedEventAsync();
+        public System.Threading.Tasks.Task SubscribeStationDataAsync(string stationName, string cityName, int refreshingTime) {
+            return base.Channel.SubscribeStationDataAsync(stationName, cityName, refreshingTime);
         }
     }
 }

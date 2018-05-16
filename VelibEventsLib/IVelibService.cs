@@ -11,18 +11,6 @@ namespace VelibEventsLib
     interface IVelibService
     {
         [OperationContract]
-        void GetStationData(string stationName, string cityName);
-
-        [OperationContract]
-        void SubscribeCalculatedEvent();
-
-        [OperationContract]
-        void SubscribeCalculationFinishedEvent();
-
-        /*[OperationContract]
-        List<Station> GetStations(string cityName);
-
-        [OperationContract]
-        List<City> GetCities();*/
+        void SubscribeStationData(string stationName, string cityName, int refreshingTime);
     }
 }
